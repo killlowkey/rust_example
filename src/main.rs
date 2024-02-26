@@ -33,5 +33,6 @@ fn main() {
 
     // trait_example::trait_example();
     // trait_example::trait_notify_restraint_example();
-    trait_example::trait_notify_with_display_restraint_example();
+    // trait_example::trait_notify_with_display_restraint_example();
+    trait_example::largest_example();
 }
