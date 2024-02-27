@@ -2,6 +2,11 @@ use std::fmt::{Debug, Display, Formatter};
 
 pub trait Summary {
     fn summarize(&self) -> String;
+
+    // 可以不用实现该方法，因为有默认实现
+    fn default(&self) -> String {
+        String::from("default implementation")
+    }
 }
 
 pub struct Post {
@@ -38,11 +43,12 @@ pub fn trait_example() {
     println!("{}", weibo.summarize());
 }
 
+// 限定都是 Summary 类型
 pub fn notify<T: Summary>(item: &T) {
     println!("Breaking news! {}", item.summarize());
 }
 
-// 多重约束
+// 多重约束：Summary 和 Display 类型
 // pub fn notify_with_display(item: &(impl Summary + Display)) {}
 pub fn notify_with_display<T: Summary + Display>(item: &T) {
     println!("{}", item)
@@ -70,7 +76,7 @@ pub fn trait_notify_with_display_restraint_example() {
     // notify_with_display(&weibo); // error
 }
 
-// where 约束
+// where 约束，等价于下面的约束，本质上就是优化 <> 里面东西，使得看起来更简洁
 // fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {}
 fn some_function<T, U>(t: &T, u: &U) -> i32
     where T: Display + Clone,
@@ -79,6 +85,8 @@ fn some_function<T, U>(t: &T, u: &U) -> i32
     1
 }
 
+// PartialOrd 比较顺序
+// Copy 用于拷贝数据
 fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
     let mut largest = list[0];
 
@@ -113,4 +121,30 @@ pub fn largest_example() {
     let char_list = vec!['y', 'm', 'a', 'q'];
     let result = largest(&char_list);
     println!("The largest char is {}", result);
+
+    let age_list = [1, 2, 400, 3, 8, 5];
+    let result = largest(&age_list);
+    println!("The largest number is {}", result);
+}
+
+fn returns_summary(switch: bool) -> Box<dyn Summary> {
+    if switch {
+        Box::new(Post {
+            title: String::from(
+                "Penguins win the Stanley Cup Championship!",
+            ),
+            author: String::from("Iceburgh"),
+            content: String::from(
+                "The Pittsburgh Penguins once again are the best \
+                 hockey team in the NHL.",
+            ),
+        })
+    } else {
+        Box::new(Weibo {
+            username: String::from("horse_ebooks"),
+            content: String::from(
+                "of course, as you probably already know, people",
+            ),
+        })
+    }
 }

@@ -30,9 +30,12 @@ fn main() {
     // option_example::option_example()
 
     // generics_example::add_example();
+    // generics_example::result_example();
+    // generics_example::display_array_new_example();
+    generics_example::hashmap_example();
 
     // trait_example::trait_example();
     // trait_example::trait_notify_restraint_example();
     // trait_example::trait_notify_with_display_restraint_example();
-    trait_example::largest_example();
+    // trait_example::largest_example();
 }
