@@ -84,3 +84,27 @@ pub fn if_example() {
     };
     println!("The value of number is: {}", number);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn for_example_test() {
+        for_example()
+    }
+
+    #[test]
+    fn while_example_test() {
+        while_example()
+    }
+
+    #[test]
+    fn loop_example_test() {
+        loop_example()
+    }
+
+    #[test]
+    fn if_example_test() {
+        if_example()
+    }
+}

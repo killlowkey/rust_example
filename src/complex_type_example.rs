@@ -139,3 +139,33 @@ pub fn vec_example() {
         println!("get successfully: {}", value)
     }
 }
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+    #[test]
+    fn vec_example_test() {
+        vec_example()
+    }
+
+    #[test]
+    fn array_example_test() {
+        array_example()
+    }
+
+    #[test]
+    fn enum_example_test() {
+        enum_example()
+    }
+
+    #[test]
+    fn string_example_test() {
+        string_example()
+    }
+
+    #[test]
+    fn tuple_example_test() {
+        tuple_example()
+    }
+}
