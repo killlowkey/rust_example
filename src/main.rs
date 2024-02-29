@@ -1,3 +1,7 @@
+extern crate core;
+
+use crate::option_example::option_method_example;
+
 mod greet_world;
 mod struct_example;
 mod flow_example;
@@ -10,10 +14,13 @@ mod lifetime_example;
 mod tokio_example;
 mod result_example;
 mod closure_example;
+mod mod_example;
+mod mod2;
+mod use_example;
 
 
-#[tokio::main]
-pub async fn main()  {
+// #[tokio::main]
+fn main()  {
     // greet_world::greet_world();
 
     // let p = struct_example::Person {
@@ -28,6 +35,7 @@ pub async fn main()  {
     // loop_example::loop_example()
 
     // option_example::option_example()
+    // option_example::option_method_example();
 
     // generics_example::add_example();
     // generics_example::result_example();
@@ -45,5 +53,7 @@ pub async fn main()  {
     // result_example::result_fn_example();
     // result_example::result_error_example();
 
-    closure_example::closure_example();
+    // closure_example::closure_example();
+
+    lifetime_example::return_owner_example();
 }

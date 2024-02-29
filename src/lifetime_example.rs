@@ -47,3 +47,20 @@ fn important_excerpt_example() {
         part: first_sentence,
     };
 }
+
+#[derive(Copy, Clone, Debug)]
+struct Person {
+    age: i32,
+}
+
+fn return_owner(a: &Person) -> Person {
+    // 必须要实现 #[derive(Copy, Clone)]
+    *a
+}
+
+pub fn return_owner_example() {
+    let a1 = Person { age: 10 };
+    let a2 = return_owner(&a1);
+    println!("a1 = {:?}", a1);
+    println!("a2 = {:?}", a2);
+}
