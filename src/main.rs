@@ -18,6 +18,7 @@ mod mod_example;
 mod mod2;
 mod use_example;
 mod box_example;
+mod abi;
 
 
 // #[tokio::main]
