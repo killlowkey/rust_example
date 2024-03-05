@@ -148,3 +148,36 @@ fn returns_summary(switch: bool) -> Box<dyn Summary> {
         })
     }
 }
+
+// https://time.geekbang.org/column/article/410038
+// 而接口将调用者和实现者隔离开，大大促进了代码的复用和扩展。
+// 面向接口编程可以让系统变得灵活，当使用接口去引用具体的类型时，我们就需要虚表来辅助运行时代码的执行。
+// 有了虚表，我们可以很方便地进行动态分派，它是运行时多态的基础。
+pub fn virtual_table() {
+    let mut post = Post {
+        title: String::from(
+            "Penguins win the Stanley Cup Championship!",
+        ),
+        author: String::from("Iceburgh"),
+        content: String::from(
+            "The Pittsburgh Penguins once again are the best \
+                 hockey team in the NHL.",
+        )
+    };
+
+    // 类型擦除，转为具体的 trait，此时需要虚表的支持
+    let summary: &mut dyn Summary = &mut post;
+    println!("{}", summary.summarize());
+}
+
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+
+    #[test]
+    fn virtual_table_test() {
+        virtual_table();
+    }
+}

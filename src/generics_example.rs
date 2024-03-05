@@ -25,6 +25,17 @@ fn add<T: std::ops::Add<Output=T>>(a: T, b: T) -> T {
     a + b
 }
 
+pub fn add_example2() {
+    let i = add::<usize>(10, 10);
+    assert_eq!(i, 20);
+
+    // error example
+    // let mut x = "hello, ".to_string();
+    // let mut y = "world".to_string();
+    // let z = add::<&mut String>(&mut x, &mut y);
+    // assert_eq!(z, "hello, world".to_string());
+}
+
 pub fn add_example() {
     println!("add i8: {}", add(2i8, 3i8));
     println!("add i32: {}", add(20, 30));

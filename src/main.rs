@@ -17,6 +17,7 @@ mod closure_example;
 mod mod_example;
 mod mod2;
 mod use_example;
+mod box_example;
 
 
 // #[tokio::main]
@@ -41,6 +42,7 @@ fn main()  {
     // generics_example::result_example();
     // generics_example::display_array_new_example();
     // generics_example::hashmap_example();
+    generics_example::add_example2();
 
     // trait_example::trait_example();
     // trait_example::trait_notify_restraint_example();
@@ -55,5 +57,5 @@ fn main()  {
 
     // closure_example::closure_example();
 
-    lifetime_example::return_owner_example();
+    // lifetime_example::return_owner_example();
 }
