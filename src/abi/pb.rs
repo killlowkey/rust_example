@@ -1,4 +1,4 @@
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct PbPerson {
     pub(crate) name: String,
     pub(crate) age: u8,
