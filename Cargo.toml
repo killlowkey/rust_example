@@ -8,3 +8,6 @@ edition = "2021"
 [dependencies]
 tokio = { version = "1", features = ["full"] }
 anyhow = "1" # 错误处理
+
+[dev-dependencies]
+criterion = "0.4" # 压力测试库

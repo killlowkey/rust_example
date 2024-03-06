@@ -1,7 +1,4 @@
 extern crate core;
-
-use crate::option_example::option_method_example;
-
 mod greet_world;
 mod struct_example;
 mod flow_example;

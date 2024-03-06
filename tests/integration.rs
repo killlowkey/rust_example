@@ -1,3 +1,4 @@
+// 执行 cargo test 运行
 #[cfg(test)]
 mod tests {
     // rust_example 为 Cargo.toml 中 package 的 name
