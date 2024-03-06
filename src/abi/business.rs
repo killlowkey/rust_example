@@ -65,9 +65,9 @@ impl PersonService {
         self.data.get(name)
     }
 
-    // pub fn get_mut(&mut self, name: &str) -> Option<&mut PbPerson> {
-    //     (&mut self.data.get(name)).as_deref_mut()
-    // }
+    pub fn get_mut(&mut self, name: &str) -> Option<&mut PbPerson> {
+        self.data.get_mut(name)
+    }
 
     pub fn list(&mut self) -> Option<Vec<&PbPerson>> {
         let mut res: Vec<&PbPerson> = vec![];

@@ -23,9 +23,14 @@ mod tests {
         println!("{:?}", result);
         assert_eq!(result.is_err(), true);
 
-        let p = service.get("ray").unwrap();
+        let p = service.get("ray").unwrap().to_owned();
         println!("{:?}", p);
-        assert_eq!(*p, PbPerson::new("ray".into(), 20));
+        assert_eq!(p, PbPerson::new("ray".into(), 20));
+
+        // 转为所有权在进行比较
+        let x = service.get_mut("ray").unwrap();
+        assert_eq!(x.to_owned(), PbPerson::new("ray".into(), 20));
+        println!("x={:?}", x);
 
         let vec = service.list();
         assert_eq!(vec.is_some(), true);
@@ -35,6 +40,8 @@ mod tests {
 
         let result1 = service.remove("sjsjsj");
         assert_eq!(result1.is_err(), true);
-        println!("{:?}", result1.err().unwrap());
+        // println!("{:?}", result1.err().unwrap());
 
-      
+        assert_eq!(service.is_empty(), false);
+    }
+}
