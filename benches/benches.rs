@@ -4,9 +4,9 @@ use rust_example::abi::pb::PbPerson;
 
 fn bench_simple(b: &mut Bencher) {
     let mut service = PersonService::new();
-    service.add_person(PbPerson::new("ray".into(), 20)).expect("TODO: panic message");
+    service.add(PbPerson::new("ray".into(), 20)).expect("TODO: panic message");
     b.iter(|| {
-        service.get_person("ray");
+        service.get("ray");
     })
 }
 
