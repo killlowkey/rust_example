@@ -1,3 +1,9 @@
+[workspace]
+members = [
+    ".",
+    "printable"
+]
+
 [package]
 name = "rust_example"
 version = "0.1.0"
@@ -8,6 +14,7 @@ edition = "2021"
 [dependencies]
 tokio = { version = "1", features = ["full"] }
 anyhow = "1" # 错误处理
+printable = { version = "*", path = "printable" } # 子 crate
 
 [dev-dependencies]
 criterion = "0.4" # 压力测试库
