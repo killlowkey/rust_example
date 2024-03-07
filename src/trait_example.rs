@@ -162,7 +162,7 @@ pub fn virtual_table() {
         content: String::from(
             "The Pittsburgh Penguins once again are the best \
                  hockey team in the NHL.",
-        )
+        ),
     };
 
     // 类型擦除，转为具体的 trait，此时需要虚表的支持
@@ -171,13 +171,50 @@ pub fn virtual_table() {
 }
 
 
+// https://github.com/awwsmm/rust-mvp/blob/main/sensor/src/lib.rs
+pub trait Parent {
+    fn new(name: String) -> Self;
+    fn get_parent_name(&self) -> String;
+}
+
+// Child 继承 Parent, 后续实现 Child 也必须实现 Parent
+pub trait Child: Parent {
+    fn get_name(&self) -> String;
+}
+
+#[derive(PartialEq, Clone, Debug)]
+pub struct ParentTrait(String);
+
+impl Parent for ParentTrait {
+    fn new(name: String) -> Self {
+        ParentTrait(name)
+    }
+
+    fn get_parent_name(&self) -> String {
+        return format!("{} parent", &self.0);
+    }
+}
+
+impl Child for ParentTrait {
+    fn get_name(&self) -> String {
+        return self.0.clone();
+    }
+}
+
+
 #[cfg(test)]
 mod tests {
-
     use super::*;
 
     #[test]
     fn virtual_table_test() {
         virtual_table();
+    }
+
+    #[test]
+    fn parent_test() {
+        let mut parent = ParentTrait::new("ray".into());
+        println!("get_parent_name={:?}", parent.get_parent_name());
+        println!("get_name={:?}", parent.get_name());
     }
 }
