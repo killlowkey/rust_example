@@ -22,7 +22,7 @@ mod tests {
         // Rc::new 单线程引用，以下例子无法使用
         // let counter = Rc::new(Mutex::new(0));
 
-        // 原子引用计数 Arc<T>
+        // 多线程：原子引用计数 Arc<T>
         let counter = Arc::new(Mutex::new(0));
         let mut handles = vec![];
 
