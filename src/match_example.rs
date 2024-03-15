@@ -72,3 +72,63 @@ pub fn match_example5() {
         }
     }
 }
+
+
+#[cfg(test)]
+mod tests {
+    use std::ops::Add;
+
+    #[test]
+    fn test_ownership_moved() {
+        // 在 match 语句中使用 option、result，该所有权是否移动，取决于对值如何处理
+        let name: Option<String> = Some("ray".into());
+        match name {
+            Some(n) => {
+                println!("match statement value {n}"); // name's ownership moved
+            }
+            None => {
+                println!("not found value");
+            }
+        }
+
+        // 无法打印所有权已被移动
+        // println!("outside statement value {}", name.unwrap())
+    }
+
+
+    #[test]
+    fn test_ownership_not_moved() {
+        // 在 match 语句中使用 option、result，该所有权是否移动，取决于对值如何处理
+        let name: Option<String> = Some("ray".into());
+        match name {
+            Some(ref n) => {
+                println!("match statement value {n}"); // 这里使用引用，那么所有权不会被移动
+            }
+            None => {
+                println!("not found value");
+            }
+        }
+
+        // 可以打印，因为在 Match 语句中使用的是引用
+        println!("outside statement value {}", name.unwrap())
+    }
+
+
+    #[test]
+    fn test_ownership_mut() {
+        // 在 match 语句中使用 option、result，该所有权是否移动，取决于对值如何处理
+        let mut name: Option<String> = Some("ray".into());
+        match name {
+            Some(ref mut n) => { // ref mut n: 表示的是 mut 的引用, 可以修改值
+                println!("match statement value {n}"); // 这里使用引用，那么所有权不会被移动
+                n.push_str(" hello");
+            }
+            None => {
+                println!("not found value");
+            }
+        }
+
+        // 可以打印，因为在 Match 语句中使用的是引用
+        println!("outside statement value {}", name.unwrap())
+    }
+}
