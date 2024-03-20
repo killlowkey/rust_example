@@ -65,7 +65,11 @@ mod tests {
         // Rc::new 单线程引用，以下例子无法使用
         // let counter = Rc::new(Mutex::new(0));
 
+        // https://doc.rust-lang.org/stable/std/sync/struct.Arc.html
+        // T 为 heap 上的对象，使用 clone 克隆 Rc 或 Arc 对象后，会共享原先的 T 对象
+        // 单线程：引用计数 Rc<T>
         // 多线程：原子引用计数 Arc<T>
+        // Mutex::new(0) 在多线程中无法多次引用，需要使用计数器来实现
         let counter = Arc::new(Mutex::new(0));
         let mut handles = vec![];
 
@@ -74,8 +78,7 @@ mod tests {
             // let counter = Rc::clone(&counter);
             let counter = Arc::clone(&counter);
             let handle = thread::spawn(move || {
-                let mut num = counter.lock().unwrap();
-
+                let mut num = counter.lock().unwrap(); // 线程执行完、锁就会释放，锁跟随作用域
                 *num += 1;
             });
             handles.push(handle);
