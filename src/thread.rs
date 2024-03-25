@@ -113,4 +113,20 @@ mod tests {
             println!("Got: {}", received);
         }
     }
+
+    // https://doc.rust-lang.org/std/thread/struct.Thread.html
+    #[test]
+    fn test_thread_unpark() {
+        let parked_thread = thread::Builder::new().spawn(|| {
+            println!("Parking Thread");
+            thread::park();
+            println!("Thread Unparked");
+        }).unwrap();
+
+        thread::sleep(Duration::from_secs(2));
+        println!("unpark the thread");
+
+        parked_thread.thread().unpark();
+        parked_thread.join().unwrap();
+    }
 }
