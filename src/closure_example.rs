@@ -11,7 +11,8 @@ pub fn closure_example() {
     let square = |x| x * x;
     assert_eq!(square(5), 25);
 
-    let double = |x| -> usize x * 2;
+    let double = |x| -> usize {x * 2};
+    // let double = |x| x * 2;
     assert_eq!(call_with_one(double), 2);
 }
 

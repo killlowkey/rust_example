@@ -13,7 +13,7 @@ mod result_example;
 mod closure_example;
 mod mod_example;
 mod mod2;
-mod use_example;
+mod r#use;
 mod box_example;
 mod abi;
 

@@ -14,6 +14,7 @@ pub fn option_example() {
     assert_eq!(None, none);
 }
 
+
 pub fn option_method_example() {
     let v = vec![1, 2, 3, 4, 5, 30];
 
@@ -47,10 +48,78 @@ pub fn option_method_example() {
     assert_eq!(v.get(0).filter(is_gt_ten), None);
     assert_eq!(v.get(5).filter(is_gt_ten), Some(30).as_ref());
 
-    let value = v.get(100).map_or(99, |x| x*x);
+    let value = v.get(100).map_or(99, |x| x * x);
     assert_eq!(value, 99);
-    let value = v.get(0).map_or(99, |x| x*x);
+    let value = v.get(0).map_or(99, |x| x * x);
     assert_eq!(value, 1);
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    pub fn option_ownership_not_moved() {
+        // basic type 实现了 copy trait
+        let age = Some(10);
+        match age {
+            None => {}
+            Some(a) => { println!("{}", a); } // 这里其实是他的副本
+        }
+        println!("{:?}", age);
+    }
+
+    #[test]
+    pub fn option_ownership_moved() {
+        // name 并未实现 copy trait
+        // copy: 浅拷贝
+        // clone：深拷贝，得到一个新的 instance
+        let name = Some(String::from("ray"));
+        match name {
+            Some(n) => { // 如果不用 ref, name's values 所有权丢失
+                println!("I am {}", n);
+            }
+            _ => { println!("None name"); }
+        }
+        // println!("{:?}", name)
+    }
+
+    #[test]
+    pub fn option_ownership_ref() {
+        // name 并未实现 copy trait
+        // copy: 浅拷贝
+        // clone：深拷贝，得到一个新的 instance
+        let name = Some(String::from("ray"));
+        match name {
+            Some(ref n) => { // 如果不用 ref, name's values 所有权丢失
+                println!("I am {}", n);
+            }
+            _ => { println!("None name"); }
+        }
+        println!("{:?}", name)
+    }
+
+    #[test]
+    pub fn option_ownership_custom() {
+
+        // #[derive(Clone, Debug)]
+        // struct Animal {
+        //     pub name: String,
+        //     pub age: i8,
+        // }
+        //
+        // impl Animal {
+        //     pub fn new(name: String, age: i8) -> Self {
+        //         Animal { name, age }
+        //     }
+        // }
+        //
+        //
+        // let animal = Some(Animal::new("ray".into(), 10));
+        // match animal {
+        //     None => {}
+        //     Some(ref a) => {println!("{:?}", a);}
+        // }
+        // println!("{:?}", animal);
+    }
 }
 
 

@@ -9,9 +9,9 @@ mod tests {
         let m = Mutex::new(5);
 
         {
-            let mut num = m.lock().unwrap();
+            let mut num = m.lock().unwrap(); // lock 持有
             *num = 6;
-        }
+        } // lock 释放
 
         println!("m = {:?}", m);
     }
