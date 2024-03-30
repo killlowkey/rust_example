@@ -3,7 +3,7 @@ mod greet_world;
 mod struct_example;
 mod flow_example;
 mod complex_type_example;
-mod option_example;
+mod option;
 mod match_example;
 mod generics_example;
 mod trait_example;
